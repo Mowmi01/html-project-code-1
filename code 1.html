@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <style>
+        body {
+            font-family: 'Calibri', Times, serif, sans-serif;
+            background-color: #ffffff;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #0056b3;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .error-message {
+            color: #ff0000;
+            font-size: 14px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <input type="text" id="email" placeholder="Enter Email" required><br>
+            <input type="password" id="password" placeholder="Enter Password" required><br>
+            <input type="submit" value="Submit">
+        </form>
+        <div class="error-message" id="error"></div>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var errorElement = document.getElementById('error');
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+           
+            if (!email.match(emailRegex)) {
+                errorElement.textContent = "Invalid email address.";
+                return;
+            }
+
+            if (!password.match(passwordRegex)) {
+                errorElement.textContent = "Password must be at least 8 characters long and contain at least one uppercase letter, one special character, and one number.";
+                return;
+            }
+
+            errorElement.textContent = "";
+        });
+    </script>
+</body>
+</html>
